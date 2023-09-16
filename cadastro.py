@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import sqlite3
 import hashlib
+import os
 
 # Função para criar um hash da senha
 def criar_hash_senha(senha):
@@ -15,8 +16,14 @@ def cadastrar():
     email = email_entry.get()
     senha = senha_entry.get()
 
+    # Obtém o diretório atual do script
+    diretorio_atual = os.path.dirname(__file__)
+
+    # Constrói o caminho para o banco de dados na mesma pasta do script
+    caminho_banco = os.path.join(diretorio_atual, 'cadastro.db')
+
     # Conecta ao banco de dados
-    conn = sqlite3.connect('cadastro.db')
+    conn = sqlite3.connect(caminho_banco)
     cursor = conn.cursor()
 
     try:
@@ -83,4 +90,3 @@ cadastrar_button.grid(row=2, columnspan=2, pady=10)
 
 # Inicia a interface gráfica
 root.mainloop()
-

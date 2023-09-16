@@ -1,29 +1,33 @@
 import tkinter as tk
 import subprocess
 import sys
+import os
+
+# Obtém o diretório atual do script
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Função para abrir os diferentes recursos
 def abrir_login():
     try:
-        subprocess.Popen(['python', 'login.py'])
+        subprocess.Popen([sys.executable, os.path.join(script_dir, 'login.py')])
     except Exception as e:
         print("Erro ao abrir o Login:", e)
 
 def abrir_cadastro():
     try:
-        subprocess.Popen(['python', 'cadastro.py'])
+        subprocess.Popen([sys.executable, os.path.join(script_dir, 'cadastro.py')])
     except Exception as e:
         print("Erro ao abrir o Cadastro:", e)
 
 def abrir_sistema():
     try:
-        subprocess.Popen(['python', 'sistema.py'])
+        subprocess.Popen([sys.executable, os.path.join(script_dir, 'sistema.py')])
     except Exception as e:
         print("Erro ao abrir o Sistema:", e)
 
 def abrir_painel():
     try:
-        subprocess.Popen(['python', 'painel.py'])
+        subprocess.Popen([sys.executable, os.path.join(script_dir, 'painel.py')])
     except Exception as e:
         print("Erro ao abrir o Painel:", e)
 
@@ -58,3 +62,4 @@ fechar_button.grid(row=0, column=4, padx=10)  # Adicione o botão de fechar
 
 # Inicia a interface gráfica
 root.mainloop()
+

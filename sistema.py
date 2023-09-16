@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
-import database
 
 # Função para salvar os dados do formulário no banco de dados
 def salvar_dados():
@@ -12,11 +11,11 @@ def salvar_dados():
     encaminhamento = encaminhamento_entry.get()
     transferencia = transferencia_entry.get()
 
-    # Conecta ao banco de dados usando a conexão definida em database.py
-    conn = database.conn
+    # Conecta ao banco de dados
+    conn = sqlite3.connect('usuarios.db')
     cursor = conn.cursor()
 
-    # Insere os dados na tabela USUARIOS
+    # Insere os dados na tabela "USUARIOS" em vez da tabela "dados"
     cursor.execute("INSERT INTO USUARIOS (INTERNACAO, OBITO, ALTA, ENCAMINHAMENTO, TRANSFERENCIA_HOSPITALAR) VALUES (?, ?, ?, ?, ?)",
                    (internacao, obito, alta, encaminhamento, transferencia))
 
@@ -29,6 +28,10 @@ def salvar_dados():
     alta_entry.delete(0, tk.END)
     encaminhamento_entry.delete(0, tk.END)
     transferencia_entry.delete(0, tk.END)
+
+    # Exibe uma mensagem de sucesso
+    mensagem_sucesso = tk.Label(frame, text="Dados inseridos com sucesso!", fg="green")
+    mensagem_sucesso.grid(column=0, row=6, columnspan=2)
 
 # Cria uma janela principal
 root = tk.Tk()
